@@ -10,9 +10,16 @@ func respondWithError(w http.ResponseWriter, code int, msg string) {
 	if code > 499 {
 		log.Printf("Responding with 5XX error: %s", msg)
 	}
+	// json:"error" - This directive instructs the json.Marshal function to format the error as specified below.
+	// `
+	// 	{
+	// 		"error": "xxxxxxx"
+	// 	}
+	// `
 	type errorResponse struct {
 		Error string `json:"error"`
 	}
+
 	respondWithJSON(w, code, errorResponse{
 		Error: msg,
 	})
