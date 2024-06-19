@@ -1,0 +1,25 @@
+# Config file for Air (Live Reloading Tool)
+
+[build]
+  cmd = "go build -o ./tmp/main ."
+  bin = "./tmp/main"
+  full_bin = "/app/tmp/main"
+  delay = 2000 # ms
+  log = "air.log"
+
+[watch]
+  # Directories to watch
+  dirs = ["./"]
+
+  # Ignore these files or directories
+  ignore = [
+    "tmp",
+    "vendor",
+    ".git",
+    "air.log",
+    "node_modules"
+  ]
+
+[log]
+  # Show log at bottom
+  show = true

@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: rssagg
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    command: ["air"]
+  db:
+    image: postgres:13-alpine
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrestest
+      POSTGRES_DB: rss
+      PGDATA: /var/lib/postgresql/data/rss
+    expose:
+      - 5435
+    ports:
+      - "5435:5432"
+    restart: on-failure
+    volumes:
+      - /Users/belendia/postgres_rss:/var/lib/postgresql/data
+    command: -p 5435
