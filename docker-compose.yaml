@@ -11,8 +11,6 @@ services:
     command: ["air"]
   db:
     image: postgres:13-alpine
-    env_file:
-      - .env
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrestest
@@ -21,8 +19,9 @@ services:
     expose:
       - 5435
     ports:
-      - "5435:5432"
+      - "5435:5435"
     restart: on-failure
     volumes:
+      - ./pg_hba.conf:/var/lib/postgresql/data/rss/pg_hba.conf
       - /Users/belendia/postgres_rss:/var/lib/postgresql/data
     command: -p 5435
