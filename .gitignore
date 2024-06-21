@@ -78,4 +78,5 @@ Temporary Items
 
 rssagg
 .env
+tmp
 # End of https://www.toptal.com/developers/gitignore/api/go,macos,visualstudiocode
