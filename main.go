@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/belendia/rssagg/internal/database"
 	"github.com/go-chi/chi/v5"
@@ -70,6 +71,11 @@ func main() {
 		Handler: router,
 		Addr:    ":" + port,
 	}
+
+	// fetch feeds
+	const collectionConcurrency = 10
+	const collectionInterval = time.Minute
+	go startScraping(dbQueries, collectionConcurrency, collectionInterval)
 
 	log.Printf("Serving on port: %s\n", port)
 	log.Fatal(srv.ListenAndServe())
